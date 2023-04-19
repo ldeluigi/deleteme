@@ -21,6 +21,6 @@ jobs:
             maintainer=${{ inputs.docker-username }}
             org.opencontainers.image.title=${{ inputs.image-name }}
           flavor: |
-            latest=${{ steps.semver.outputs.should-release }}
+            latest=false
       - name: Check results
         run: echo ${{ steps.meta.outputs.tags }} ||| ${{ steps.meta.outputs.labels }}

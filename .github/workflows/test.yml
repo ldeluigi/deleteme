@@ -1,0 +1,25 @@
+name: "Test"
+
+on:
+  push:
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: name/app
+          tags: type=edge
+            type=raw,value=0.1.0,enable=false
+            type=raw,value=0.1,enable=false
+            type=raw,value=0,enable=false
+          labels: |
+            maintainer=${{ inputs.docker-username }}
+            org.opencontainers.image.title=${{ inputs.image-name }}
+          flavor: |
+            latest=${{ steps.semver.outputs.should-release }}
+      - name: Check results
+        run: echo ${{ steps.meta.outputs.tags }} ||| ${{ steps.meta.outputs.labels }}

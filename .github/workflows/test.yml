@@ -12,7 +12,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: name/app
-          tags: type=edge
+          tags: |
+            type=edge
             type=raw,value=0.1.0,enable=false
             type=raw,value=0.1,enable=false
             type=raw,value=0,enable=false
